@@ -1,3 +1,5 @@
+
+(function() {
 var caps = {
     "2c1dff90d2e9c3cd1180da3aeb637d7fc07d0782ffeac0d3448a67474f0f6ce9": "cho",
     "5712d992f052b0ea512e7cebd881d43d5548b42089e261dac84edb1a2d4f71c6": "ngua",
@@ -71,3 +73,4 @@ var caps = {
     "bcedcd8e88f4b1aea09ebb74421e22d97f99bb38284e9e78ef34188b19f4bb9a": "nam",
     "edefa5e03a85c33e93974cf76826aaa6194fb5ec7a49494b41b4bb7284a9cb80": "hoa"
 }
+    })();
