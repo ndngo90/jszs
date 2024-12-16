@@ -1,54 +1,73 @@
-var allFunc = []
-var confirmBtn = false
-function changeIconAndStyleAds(id) {
-    let iconElement = document.querySelector('.ads_' + id).querySelector('.iconyoutube');
-    iconElement.classList.remove('ybprosm_grey');
-    iconElement.classList.add('ybprosm');
+var caps = {
+    "2c1dff90d2e9c3cd1180da3aeb637d7fc07d0782ffeac0d3448a67474f0f6ce9": "cho",
+    "5712d992f052b0ea512e7cebd881d43d5548b42089e261dac84edb1a2d4f71c6": "ngua",
+    "0c3099cecca8fb288056ffa9c50734459dfddbb6e0674945ecf022ea4b79eca6": "hoa",
+    "e09afb9abbcf466d8b644790149de592c4de96957b8882900e20f9dca96c62f6": "ho",
+    "a9a86f67249a84f0b3c5521c722ca94fc8f074eef8e127d2f0af74097e41e959": "tao",
+    "88f52784294097a76b47316ebe1e9fa80d9c008bdc088659718eec3b3c8857c3": "ho",
+    "36f93c0c7d57b1b52d5d2bf4e5b0bde1acb8b6ef8e1ab12849df08059b901263": "ghe",
+    "1ef5d0ced660986b2d6d31d0b3b6af4be53968aed88cb325bef2f94dfe90d1fd": "hoa",
+    "66e716a424c629f08636a4a8b5a3414b2d8464160f7a51158299364bbb6e53fc": "ngua",
+    "417fbe77e16d024885e42432f090826945a55a1168dabbd13b13e41113a3b8de": "ho",
+    "c6bc2ca9840b8cb43a290ab635af411fa301b7575e27ccbc55f26ba5eaa24542": "ngua",
+    "4d685fc8b5416e7f4e966ec7ed1699d31f9d8276498fdd06f42588b42e6c079c": "nam",
+    "ac4470994b32a2bbeb8557364d03b22fbc4758e2ec4f1797f2561469a543e5d0": "hoa",
+    "828149dab955dc6772d7358b20819926d86f04944ed208c51b367cf5c36d9230": "tao",
+    "e0c5c4e09b9048d01623fb240e48ff93e35167a1f35c482ee6354631c644bbaa": "lon",
+    "babc718690d746592aa7f8b66619f234be76363bafd12d236d791d076466cd4d": "ho",
+    "7c90ff69ff7376462dfe6bba044825a10ab447c3cf9e5bc86fe6996862a77ffd": "ngua",
+    "f29c914a36b9c94555f55db2885efba69ccfb4e014e63871461c9e1f2f4f59d6": "tao",
+    "910866b7f3390df157d7988140c00df2bbd12ec7c5034e056da2848d1f3f9d67": "ghe",
+    "2a4fafdeee4d16ee1922354998954b3b0da086a4e296c8b741bb542f349d5e44": "bo",
+    "849ffe576294bbf9cddb415c4d1a2abd02ae803012ad76008707ce6f31e15091": "ghe",
+    "3e8355101b89120f1f14bd76951900652015f43175886bd4c3569ed0b6dfd0e4": "lon",
+    "c0291764a7d5a5ce4a2dad38d046df0be5697f0610f0526be4dd2d07ae4b03ad": "nam",
+    "00fb8eafbffdc73fb4e9e87ed1732218c1ce9bab39aec6b613a7a0a77c87530b": "lon",
+    "56e26e9daa259236f97d0954780e90e6349de5a2b31ae3a522c914040b4fd6fc": "cho",
+    "3c453c281e3cc46802e16872a48cf72ccf62738b02b54ea4f1002b833e76abd5": "nam",
+    "e4d360692a441d529cbfac91a3c6fa1a07bacd17e2edf463696ed9c56a1a6c4e": "tao",
+    "132268e3977ec1bc5e2f6c050a77918fd65f11783b7204f4ffe6f4b08b4396ce": "cam",
+    "2928a27289e6f8dba7050b42f35064032ad1fde932253cb1cff7e4911c167392": "tao",
+    "50d0c47a98e71a18162871c945ee6d32178273830c158c30d2dac4ab2bfce148": "hoa",
+    "156ebe6c613963830a1165e640ad79e2fd4335901d53e7ee7c11762fae4e9b26": "lon",
+    "37174dfa6477dbc46cae4846906aee3bce7dd383e019a7af20b14756a1f27d85": "tao",
+    "4687106338ab8cc590dd8c00668071a1e1e6bcb8e99e9c0eb7f2ca4940f516d2": "ho",
+    "3acc3493c08da728313cc5d659665c0b444e88f882bb6eae15d6eac2e378ddd3": "nam",
+    "095c3df890900b761fcfbd69ea4ab07ae0eac972bd755a2c0923a437b4be4121": "ho",
+    "fe214ed7b53ebcfcbff5542c85562e4ac470fb62aba9c6fa1913c49542973bf9": "ho",
+    "2117084dd71fdbfe2c34e4e32507bfeb5eb9e4eeddb49acab133a74b10b28e5b": "cam",
+    "4d3467cb08d1ca06591be98d1b5a3ccb9774d7e76480a3b0dac488ecdb52960d": "bo",
+    "54ffb802cff410d363a53fab35d98db6f04a612851ed6a33c53798bbc53e64cb": "cam",
+    "ee68542bd91a37ca7df7ba4356bcac3c6152bfe76ec8e3eaca1ca3935b4a0d85": "hoa",
+    "07f0e2935595ae6140f3b98d64cee9a9c09908db721227b5daf13a6042d46666": "cam",
+    "ddebf1d7fedc673057772284bce1a855d3bd24d86fe3d30fa13baf4795aaba86": "ngua",
+    "7f7c1a1c7cc56af6baa20030ded4902ba39dfe334e119c2a933304b933905e5d": "cam",
+    "b348ef9ef92541d2f89f27a9c2223a6d6294a6751e7fa2e0e74fb0cdc6dc03e5": "cho",
+    "ab2284705f339f741f5a869699960c3b2f20f8e02be9694104a2a3726f3cf6c8": "bo",
+    "d01cd4e12053644cf7646b5a59d6fc69967dfbec3c789f744dfe0e9c63a941d0": "ghe",
+    "6c471b7a5337907671c4d676292af47290761331b05c72e127bceaefc05f4b6b": "ho",
+    "00f36de1a8f046b183f09a7327ac0f47566e050564e9627b5873b4d5383cd192": "cho",
+    "8b45b791c73b2961003be3fd95d3c3bcf5d03dbb97b5ee8abdd39cd48f66fa00": "ghe",
+    "2e31b80a8d46b8d3763ad03e06b58371551741bf32df702bb3f96fa406b47b6b": "cho",
+    "2967b60b9babc9a1ba43cbf5788f805ce16b3ea84b33719873a861d371e332bd": "lon",
+    "721f20cfd36f7e40598803ba2d3fbdbe7d13b19ccd45d68990e58ec31567b7f5": "cam",
+    "89f1c3286d0229458b18679f858c79f352a383ccd327e49fa05719a05d2fd463": "ghe",
+    "bf10d89d9d8192fbda6b9ced87c5a6aa863f3bc6fc51c24fad70c25af47c73df": "cho",
+    "c85bdd131cfd246a7173dfe66b3ac10c9ad2ede0730d79fa1deee71af85ccb10": "ghe",
+    "86ee45318126a78e2a4c001e2abf804058b2ca74fa0f80f0d24d9e4be01e1f26": "tao",
+    "7adb1837df1b0ed9f83b4d0d628c08888fdde4675dc82d6750bd0b7ef2e6d7f0": "ngua",
+    "c42256c5de5f23e3dbe13630ac47adcba41b0cbc5e5311aae0cac7ecdbdce706": "cam",
+    "18825ad366907e9f145e59ed7416f90d459273bceea9efde5ecdcb50b084d9be": "ngua",
+    "c5dac43b484b9bbe81669ad493df319317e1a1b2447ddfaba4af2edd8cfb22c3": "hoa",
+    "2eda5391e4e19c7de3ff793dc609cbf0e625d7a95f10cd8081140c0d580621a3": "cho",
+    "78af23b4e1bacf9e1e02e5bdf8d88b015216e151c059498988f73fa296934ba5": "ngua",
+    "ef9111284c0e8a9078df4fd70a015579918519afefb703a79a3e91bba3c64f4c": "nam",
+    "365d130dfa88ed418c7a548978597e01f000f6c7007d7e18f848d6833b882c64": "ngua",
+    "3be3b1d717ff7106c3e4d5c315e62982f0e86b12352aeb1f12b5cbd19096f837": "ngua",
+    "35e3b846f609c63ffd3e282241857b22bbfd4c26de3762e3a301b2ba2c22db51": "nam",
+    "11070638c23e2b91b6a9d0092594d5caba51a3cb478602d6453044cff7c10e2d": "bo",
+    "96997fef76dcd7266110cd2ee436b81376952bea285b485bb2288b5cff2a0a8b": "tao",
+    "6bc85ee707e25d21cdf643f71bdc2f46b7590c619fcbd777dbd24b6ca38ad945": "lon",
+    "bcedcd8e88f4b1aea09ebb74421e22d97f99bb38284e9e78ef34188b19f4bb9a": "nam",
+    "edefa5e03a85c33e93974cf76826aaa6194fb5ec7a49494b41b4bb7284a9cb80": "hoa"
 }
-allFunc['viewCheckDirect'] = function (taskId) {
-    if (!confirmBtn) {
-        confirmBtn = true;
-        let reportId = $("#ads_report_id_" + taskId).val();
-        let hash = $("#ads_hash_" + taskId).val();
-        let videoId = $("#ads_video_id_" + taskId).val();
-        let timer = $("#ads_timer_" + taskId).val();
-        let errorElem = $("#ads_error_text_" + taskId);
-        let errorBtnView = $("#btn_error_view_" + taskId);
-        let successText = $("#start-ads-" + taskId);
-        let btnCheckingBlock = $("#ads_checking_btn_" + taskId);
-        let loaderForSendBtn = $("#ads_loader_" + taskId);
-        $.ajax({
-            url: originalDomain + '/ajax/earnings/ajax-youtube-external.php', type: 'POST',
-            data: {hash: hash, task_id: taskId, report_id: reportId, video_id: videoId, timer: timer},
-            dataType: 'json',
-            beforeSend: function () {
-                loaderForSendBtn.css({'display': ''});
-                $("#ads_btn_confirm_" + taskId).css({"display": "none"});
-            },
-
-            error: function (data) {
-                errorElem.html(data.html);
-                confirmBtn = false;
-                btnCheckingBlock.css({"display": ""});
-                loaderForSendBtn.css({'display': 'none'});
-            },
-            success: function (data) {
-                loaderForSendBtn.css({'display': 'none'});
-                if (data.error) {
-                    errorBtnView.css({"display": ""});
-                    $("#ads_btn_confirm_" + taskId).css({"display": "none"});
-                    confirmBtn = false;
-                    eval(data.code)
-                } else {
-                    confirmBtn = false;
-                    btnCheckingBlock.css({"display": "none"});
-                    successText.css({"display": ""});
-                    successText.html(`<div style="text-align:center; padding-top:3px; color:green;">${data.html}</div>`);
-                    $('#ads-link-' + taskId).attr('data-status', 'inactive');
-                    changeIconAndStyleAds(taskId);
-                }
-            }
-        });
-    }
-
-};
